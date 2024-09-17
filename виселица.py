@@ -140,18 +140,21 @@ def play(word):
                         print('Хорошая попытка/nПопробуй еще.')
                         guessed_letters += s
                         tries -= 1
-            elif len(s) > 1:
-                if s == word:
-                    guessed_words += s
-                    print('Ура, ты отгадал слово!')
-                    print('Слово было:', word)
-                    return word
+            elif len(s) > 1:            # Проверка слова
+                if s in guessed_words:
+                    print('Это слово уже было.')
                 else:
-                    guessed_words += s
-                    tries -= 1
-                    print('Это слово неверное')
+                    if s == word:
+                        guessed_words += s
+                        print('Ура, ты отгадал слово!')
+                        print('Слово было:', word)
+                        return word
+                    else:
+                        guessed_words.append(s)
+                        tries -= 1
+                        print('Это слово неверное.')
         else:
-            print('Напиши слово или букву')
+            print('Напиши слово или букву.')
 
     print('Эх, вы так и не смогли угадать слово.\nА им было...\n',word)
     return 
